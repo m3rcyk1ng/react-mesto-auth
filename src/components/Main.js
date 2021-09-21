@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from "./Card";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import {apiAuth} from "../utils/ApiAuth";
 
 function Main({cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete}) {
     const currentUser = React.useContext(CurrentUserContext);
@@ -23,9 +24,9 @@ function Main({cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCa
                 <button className="profile__add-button" type="button" aria-label="Добавить новую карточку"
                         onClick={onAddPlace}></button>
             </section>
-            <section className="elements">{cards.map((card) =>
+            <section className="elements">{cards.map((card) => (
                 <Card key={card._id} card={card}
-                      onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>)}</section>
+                      onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>))}</section>
         </main>
     )
 }
