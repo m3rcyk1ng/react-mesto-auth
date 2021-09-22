@@ -18,6 +18,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
 import SuccessfulLogin from "./SuccessfulLogin"
+import Spinner from "./Spinner";
 
 function App() {
     const [currentUser, setCurrentUser] = useState({});
@@ -153,8 +154,12 @@ function App() {
                         setEmail(data);
                         history.push('/');
                         Promise.all([api.getUserInfo(), api.getInitialCards()]).then((res) => {
-                            setTimeout(setSuccessfullLog, 5000)
-                        }).catch(() => console.log(res.status));
+                            setIsLoading(false);
+                            setTimeout(setSuccessfullLog, 5000);
+                        }).catch(() => console.log(res.status))
+                            .finally(() => {
+                            setIsLoading(true);
+                        })
                     }
                 }
             )
@@ -216,6 +221,13 @@ function App() {
         checkToken(localStorage.token);
     }, []);
 
+    /////////////////////
+    const [isLoading, setIsLoading] = useState(true);
+
+
+    ////////////////////
+
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <Header email={email} quit={deleteToken}/>
@@ -226,6 +238,7 @@ function App() {
                 <Route path="/sign-up">
                     <Register onSubmit={handleUserRegister}/>
                 </Route>
+                <Spinner isLoading={isLoading}/>
                 <ProtectedRoute component={Main} cards={cards} loggedIn={loggedIn}
                                 onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
                                 onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}
