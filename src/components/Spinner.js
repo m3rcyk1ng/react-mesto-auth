@@ -2,7 +2,7 @@ import spinner from '../images/Infinity.svg'
 
 function Spinner() {
     return (
-        <img className='loader' src={spinner} alt='лоадер'/>
+        <img className='spinner' src={spinner} alt='лоадер'/>
     )
 }
 

@@ -31,6 +31,10 @@ function App() {
         setSuccessfulLogin(true);
     }
 
+    function setIsLoad() {
+        setIsLoading(false);
+    }
+
     function handleUpdateUser(profile) {
         api
             .updateUserInfo(profile)
@@ -156,8 +160,8 @@ function App() {
                         setEmail(data);
                         history.push('/');
                         Promise.all([api.getUserInfo(), api.getInitialCards()]).then((res) => {
-                            setIsLoading(false);
-                            setTimeout(setSuccessfullLog, 5000);
+                            setTimeout(setIsLoad, 3000)
+                            setTimeout(setSuccessfullLog, 8000);
                         }).catch(() => console.log(res.status));
                     }
                 }
@@ -174,13 +178,14 @@ function App() {
         apiAuth.userReg(data)
             .then((res) => {
                 history.push('/sign-in');
-                setInfoToolTipPopup(true);
                 setStatus(false);
             })
             .catch((res) => {
                 console.log(res.status);
-                setInfoToolTipPopup(true);
                 setStatus(true);
+            })
+            .finally(() => {
+                setInfoToolTipPopup(true);
             })
     }
 
@@ -217,7 +222,9 @@ function App() {
     }
 
     useEffect(() => {
-        checkToken(localStorage.token);
+        if (localStorage.token) {
+            checkToken(localStorage.token);
+        }
     }, []);
 
     return (
@@ -230,7 +237,6 @@ function App() {
                 <Route path="/sign-up">
                     <Register onSubmit={handleUserRegister}/>
                 </Route>
-                {/*<Spinner isLoading={isLoading}/>*/}
                 <ProtectedRoute component={Main} cards={cards} loggedIn={loggedIn}
                                 onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
                                 onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}

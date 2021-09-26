@@ -24,8 +24,8 @@ function handleSubmit(e) {
 return(
     <form className="form" onSubmit={handleSubmit}>
     <h2 className="form__title">Вход</h2>
-        <input className="form__input" placeholder="Email" onChange={handleChangeEmail} />
-        <input className="form__input" placeholder="Пароль" onChange={handleChangePass} />
+        <input className="form__input" placeholder="Email" onChange={handleChangeEmail} value={email || ''}/>
+        <input className="form__input" placeholder="Пароль" onChange={handleChangePass} value={password || ''}/>
         <button className="form__button">Войти</button>
     </form>
 )
