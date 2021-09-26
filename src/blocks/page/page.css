@@ -9,11 +9,11 @@
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     position: relative;
-    flex-shrink: 1;
-    outline: 3px red dashed;
-    flex-direction: column;
-    display: flex;
-    min-height: 100vh;
+    /*flex-shrink: 1;*/
+    /*outline: 3px red dashed;*/
+    /*flex-direction: column;*/
+    /*display: flex;*/
+    /*min-height: 100vh;*/
 }
 
 ::-webkit-scrollbar-track {
