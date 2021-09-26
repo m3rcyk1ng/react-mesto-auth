@@ -3,6 +3,7 @@
 @import url(././vendor/fonts.css);
 @import url(././blocks/page/page.css);
 @import url(./blocks/spinner/spinner.css);
+@import url(./blocks/content/content.css);
 
 /* === header === */
 @import url(./blocks/header/header.css);

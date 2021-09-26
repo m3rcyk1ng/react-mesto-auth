@@ -160,7 +160,7 @@ function App() {
                         setEmail(data);
                         history.push('/');
                         Promise.all([api.getUserInfo(), api.getInitialCards()]).then((res) => {
-                            setTimeout(setIsLoad, 2000)
+                            setTimeout(setIsLoad, 2000);
                             setTimeout(setSuccessfullLog, 6000);
                         }).catch(() => console.log(res.status));
                     }
@@ -176,7 +176,7 @@ function App() {
 
     function handleUserRegister(data) {
         apiAuth.userReg(data)
-            .then((res) => {
+            .then(() => {
                 history.push('/sign-in');
                 setStatus(false);
             })
@@ -219,11 +219,15 @@ function App() {
             .catch((err) => {
                 console.log(err)
             })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     useEffect(() => {
         if (localStorage.token) {
             checkToken(localStorage.token);
+            history.push('/');
         }
     }, []);
 

@@ -2,6 +2,6 @@
     display: flex;
     max-width: 880px;
     margin: 0 auto;
-    /*flex: 0 0 auto;*/
-    /*outline: 1.5px green dashed;*/
+    flex-shrink: 0;
+    outline: 1.5px green dashed;
 }
