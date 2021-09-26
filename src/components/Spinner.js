@@ -1,8 +1,8 @@
-import spinner from '../images/Infinity.svg'
+import loader from '../images/loader.svg'
 
 function Spinner() {
     return (
-        <img className='spinner' src={spinner} alt='лоадер'/>
+        <img className='spinner' src={loader} alt='лоадер'/>
     )
 }
 

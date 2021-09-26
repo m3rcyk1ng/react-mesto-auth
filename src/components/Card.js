@@ -28,7 +28,7 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
 
     return (
         <article className="element">
-            <img className="element__photo" src={card.link} alt={card.name}/>
+            <img className="element__photo" loading="lazy" src={card.link} alt={card.name}/>
             <div className="element__overlay" onClick={handleClick}></div>
             {isOwn && <button className="element__delete-icon" type="button" aria-label="Удалить"
                               onClick={handleDelete}></button>}

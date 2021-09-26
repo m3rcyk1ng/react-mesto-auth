@@ -160,8 +160,8 @@ function App() {
                         setEmail(data);
                         history.push('/');
                         Promise.all([api.getUserInfo(), api.getInitialCards()]).then((res) => {
-                            setTimeout(setIsLoad, 3000)
-                            setTimeout(setSuccessfullLog, 8000);
+                            setTimeout(setIsLoad, 2000)
+                            setTimeout(setSuccessfullLog, 6000);
                         }).catch(() => console.log(res.status));
                     }
                 }

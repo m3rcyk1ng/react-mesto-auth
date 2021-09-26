@@ -1,6 +1,7 @@
 .page {
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     max-width: 1280px;
+    min-height: 100%;
     background-color: #000;
     margin: 0 auto;
     -webkit-font-smoothing: antialiased;
@@ -9,6 +10,10 @@
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     position: relative;
+    /*flex: 1 0 auto;*/
+    /*outline: 3px red dashed;*/
+    /*flex-direction: column;*/
+    /*display: flex;*/
 }
 
 ::-webkit-scrollbar-track {
