@@ -1,6 +1,6 @@
 import spinner from '../images/Infinity.svg'
 
-function Spinner({isLoading}) {
+function Spinner() {
     return (
         <img className='loader' src={spinner} alt='лоадер'/>
     )

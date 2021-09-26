@@ -18,12 +18,14 @@ import AddPlacePopup from "./AddPlacePopup";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
 import SuccessfulLogin from "./SuccessfulLogin"
-import Spinner from "./Spinner";
 
 function App() {
     const [currentUser, setCurrentUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
     const history = useHistory();
+
 
     function setSuccessfullLog() {
         setSuccessfulLogin(true);
@@ -47,7 +49,6 @@ function App() {
                 setCurrentUser(res);
             })
             .catch((rej) => console.log(rej))
-
     }, []);
 
     const [cards, setCards] = useState([])
@@ -146,6 +147,7 @@ function App() {
     const [infoToolTipPopup, setInfoToolTipPopup] = useState(false);
 
     function handleUserLogin(data) {
+        setIsLoading(true);
         apiAuth.userLogin(data)
             .then((res) => {
                     if (res.token) {
@@ -156,10 +158,7 @@ function App() {
                         Promise.all([api.getUserInfo(), api.getInitialCards()]).then((res) => {
                             setIsLoading(false);
                             setTimeout(setSuccessfullLog, 5000);
-                        }).catch(() => console.log(res.status))
-                            .finally(() => {
-                            setIsLoading(true);
-                        })
+                        }).catch(() => console.log(res.status));
                     }
                 }
             )
@@ -221,13 +220,6 @@ function App() {
         checkToken(localStorage.token);
     }, []);
 
-    /////////////////////
-    const [isLoading, setIsLoading] = useState(true);
-
-
-    ////////////////////
-
-
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <Header email={email} quit={deleteToken}/>
@@ -238,12 +230,12 @@ function App() {
                 <Route path="/sign-up">
                     <Register onSubmit={handleUserRegister}/>
                 </Route>
-                <Spinner isLoading={isLoading}/>
+                {/*<Spinner isLoading={isLoading}/>*/}
                 <ProtectedRoute component={Main} cards={cards} loggedIn={loggedIn}
                                 onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
                                 onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}
                                 onCardLike={handleCardLike}
-                                onCardDelete={handleCardDelete} exact path="/"/>
+                                onCardDelete={handleCardDelete} isLoading={isLoading} exact path="/"/>
             </Switch>
             <InfoTooltip isOpen={infoToolTipPopup} error={status} onClose={handlePopupClose}/>
             <SuccessfulLogin isOpen={successfulLogin} onClose={handlePopupClose}/>
